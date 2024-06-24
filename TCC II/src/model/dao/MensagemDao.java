@@ -61,7 +61,7 @@ public class MensagemDao {
 
 			// faz a consulta
 			registros = sentenca.executeQuery(
-					"SELECT id, mensagem "
+					"SELECT id, nome_fila, mensagem "
 					+ "FROM mensagens "
 					+ "WHERE status_envio = 0");
 			
@@ -70,6 +70,7 @@ public class MensagemDao {
 				do {
 					Mensagem mensagem = new Mensagem();
 					mensagem.setId(Integer.parseInt(registros.getString("id")));
+					mensagem.setQueuename(registros.getString("nome_fila"));
 					mensagem.setMessage(registros.getString("mensagem"));
 					mensagemList.add(mensagem);
 				}while(registros.next());
